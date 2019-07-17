@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jnshu.tiles.dao.ProfessionMapper">
+  <resultMap id="BaseResultMap" type="jnshu.tiles.entity.Profession">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="direction" jdbcType="VARCHAR" property="direction" />
+    <result column="profession" jdbcType="VARCHAR" property="profession" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="threshold" jdbcType="VARCHAR" property="threshold" />
+    <result column="difficulty" jdbcType="VARCHAR" property="difficulty" />
+    <result column="growth" jdbcType="VARCHAR" property="growth" />
+    <result column="scarcity" jdbcType="INTEGER" property="scarcity" />
+    <result column="yearone" jdbcType="VARCHAR" property="yearone" />
+    <result column="yeartwo" jdbcType="VARCHAR" property="yeartwo" />
+    <result column="yearthree" jdbcType="VARCHAR" property="yearthree" />
+    <result column="learnpeople" jdbcType="INTEGER" property="learnpeople" />
+    <result column="createat" jdbcType="BIGINT" property="createat" />
+    <result column="updateat" jdbcType="BIGINT" property="updateat" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, img, direction, profession, description, threshold, difficulty, growth, scarcity, 
+    yearone, yeartwo, yearthree, learnpeople, createat, updateat, introduction
+  </sql>
+  <select id="selectByExample" parameterType="jnshu.tiles.entity.ProfessionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from profession
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from profession
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from profession
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="jnshu.tiles.entity.ProfessionExample">
+    delete from profession
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="jnshu.tiles.entity.Profession">
+    insert into profession (id, img, direction, 
+      profession, description, threshold, 
+      difficulty, growth, scarcity, 
+      yearone, yeartwo, yearthree, 
+      learnpeople, createat, updateat, 
+      introduction)
+    values (#{id,jdbcType=BIGINT}, #{img,jdbcType=VARCHAR}, #{direction,jdbcType=VARCHAR}, 
+      #{profession,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{threshold,jdbcType=VARCHAR}, 
+      #{difficulty,jdbcType=VARCHAR}, #{growth,jdbcType=VARCHAR}, #{scarcity,jdbcType=INTEGER}, 
+      #{yearone,jdbcType=VARCHAR}, #{yeartwo,jdbcType=VARCHAR}, #{yearthree,jdbcType=VARCHAR}, 
+      #{learnpeople,jdbcType=INTEGER}, #{createat,jdbcType=BIGINT}, #{updateat,jdbcType=BIGINT}, 
+      #{introduction,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="jnshu.tiles.entity.Profession">
+    insert into profession
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="direction != null">
+        direction,
+      </if>
+      <if test="profession != null">
+        profession,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="threshold != null">
+        threshold,
+      </if>
+      <if test="difficulty != null">
+        difficulty,
+      </if>
+      <if test="growth != null">
+        growth,
+      </if>
+      <if test="scarcity != null">
+        scarcity,
+      </if>
+      <if test="yearone != null">
+        yearone,
+      </if>
+      <if test="yeartwo != null">
+        yeartwo,
+      </if>
+      <if test="yearthree != null">
+        yearthree,
+      </if>
+      <if test="learnpeople != null">
+        learnpeople,
+      </if>
+      <if test="createat != null">
+        createat,
+      </if>
+      <if test="updateat != null">
+        updateat,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="direction != null">
+        #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="threshold != null">
+        #{threshold,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null">
+        #{difficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="growth != null">
+        #{growth,jdbcType=VARCHAR},
+      </if>
+      <if test="scarcity != null">
+        #{scarcity,jdbcType=INTEGER},
+      </if>
+      <if test="yearone != null">
+        #{yearone,jdbcType=VARCHAR},
+      </if>
+      <if test="yeartwo != null">
+        #{yeartwo,jdbcType=VARCHAR},
+      </if>
+      <if test="yearthree != null">
+        #{yearthree,jdbcType=VARCHAR},
+      </if>
+      <if test="learnpeople != null">
+        #{learnpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createat != null">
+        #{createat,jdbcType=BIGINT},
+      </if>
+      <if test="updateat != null">
+        #{updateat,jdbcType=BIGINT},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="jnshu.tiles.entity.ProfessionExample" resultType="java.lang.Long">
+    select count(*) from profession
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update profession
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.direction != null">
+        direction = #{record.direction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profession != null">
+        profession = #{record.profession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threshold != null">
+        threshold = #{record.threshold,jdbcType=VARCHAR},
+      </if>
+      <if test="record.difficulty != null">
+        difficulty = #{record.difficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.growth != null">
+        growth = #{record.growth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scarcity != null">
+        scarcity = #{record.scarcity,jdbcType=INTEGER},
+      </if>
+      <if test="record.yearone != null">
+        yearone = #{record.yearone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yeartwo != null">
+        yeartwo = #{record.yeartwo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yearthree != null">
+        yearthree = #{record.yearthree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.learnpeople != null">
+        learnpeople = #{record.learnpeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.createat != null">
+        createat = #{record.createat,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateat != null">
+        updateat = #{record.updateat,jdbcType=BIGINT},
+      </if>
+      <if test="record.introduction != null">
+        introduction = #{record.introduction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update profession
+    set id = #{record.id,jdbcType=BIGINT},
+      img = #{record.img,jdbcType=VARCHAR},
+      direction = #{record.direction,jdbcType=VARCHAR},
+      profession = #{record.profession,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      threshold = #{record.threshold,jdbcType=VARCHAR},
+      difficulty = #{record.difficulty,jdbcType=VARCHAR},
+      growth = #{record.growth,jdbcType=VARCHAR},
+      scarcity = #{record.scarcity,jdbcType=INTEGER},
+      yearone = #{record.yearone,jdbcType=VARCHAR},
+      yeartwo = #{record.yeartwo,jdbcType=VARCHAR},
+      yearthree = #{record.yearthree,jdbcType=VARCHAR},
+      learnpeople = #{record.learnpeople,jdbcType=INTEGER},
+      createat = #{record.createat,jdbcType=BIGINT},
+      updateat = #{record.updateat,jdbcType=BIGINT},
+      introduction = #{record.introduction,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="jnshu.tiles.entity.Profession">
+    update profession
+    <set>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="direction != null">
+        direction = #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="threshold != null">
+        threshold = #{threshold,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null">
+        difficulty = #{difficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="growth != null">
+        growth = #{growth,jdbcType=VARCHAR},
+      </if>
+      <if test="scarcity != null">
+        scarcity = #{scarcity,jdbcType=INTEGER},
+      </if>
+      <if test="yearone != null">
+        yearone = #{yearone,jdbcType=VARCHAR},
+      </if>
+      <if test="yeartwo != null">
+        yeartwo = #{yeartwo,jdbcType=VARCHAR},
+      </if>
+      <if test="yearthree != null">
+        yearthree = #{yearthree,jdbcType=VARCHAR},
+      </if>
+      <if test="learnpeople != null">
+        learnpeople = #{learnpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createat != null">
+        createat = #{createat,jdbcType=BIGINT},
+      </if>
+      <if test="updateat != null">
+        updateat = #{updateat,jdbcType=BIGINT},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="jnshu.tiles.entity.Profession">
+    update profession
+    set img = #{img,jdbcType=VARCHAR},
+      direction = #{direction,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      threshold = #{threshold,jdbcType=VARCHAR},
+      difficulty = #{difficulty,jdbcType=VARCHAR},
+      growth = #{growth,jdbcType=VARCHAR},
+      scarcity = #{scarcity,jdbcType=INTEGER},
+      yearone = #{yearone,jdbcType=VARCHAR},
+      yeartwo = #{yeartwo,jdbcType=VARCHAR},
+      yearthree = #{yearthree,jdbcType=VARCHAR},
+      learnpeople = #{learnpeople,jdbcType=INTEGER},
+      createat = #{createat,jdbcType=BIGINT},
+      updateat = #{updateat,jdbcType=BIGINT},
+      introduction = #{introduction,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

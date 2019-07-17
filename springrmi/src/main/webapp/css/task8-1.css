@@ -1,0 +1,677 @@
+body {
+    margin: 0;
+}
+button {
+    border: none;
+    padding: 0;
+}
+
+/* 第一块 客服热线 */
+.one-row {
+    align-items: center;
+    height: 40px;
+}
+
+.one-fontsize {
+    font-size: 14px;
+    color: #29B078;
+    white-space: nowrap;
+}
+
+.one-image {
+    height: 22px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.one-image1 {
+    display: inline-block;
+    border: 1px solid #29B078;
+    border-radius: 11px;
+    width: 22px;
+    height: 22px;
+    background: url(../image/1/wx.png) 3px 3px/14px 14px no-repeat;
+}
+
+.one-image2 {
+    display: inline-block;
+    margin-left: 18px;
+    border: 1px solid #29B078;
+    border-radius: 11px;
+    width: 22px;
+    height: 22px;
+    background: url(../image/1/qq.png) 3px 3px/14px 14px no-repeat;
+}
+
+.one-image3 {
+    display: inline-block;
+    margin-left: 18px;
+    border: 1px solid #29B078;
+    border-radius: 11px;
+    width: 22px;
+    height: 22px;
+    background: url(../image/1/wb.png) 3px 3px/14px 14px no-repeat;
+}
+/* 第二块 导航栏显示*/
+.two {
+    min-height: 100px;
+    background: #29B078;
+}
+.two-tree {
+    margin-top: 12px;
+    font-size: 36px;
+    color: #FFFFFF;    
+}
+.two-website {
+    font-size: 8px;
+    color: #FFFFFF;
+    letter-spacing: 3.5px;
+}
+.two-a {
+    color: #FFFFFF;
+}
+.two-a:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+@media screen and (min-width: 768px) {
+    .two-ul-li {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    .two-li {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        text-align: right;
+        line-height: 100px;
+    }
+    .two-underline {
+        display: none;
+        position: absolute;
+        left: 34px;
+        bottom: 0px;
+        width: 100px;
+        height: 4px;
+        background: #FFFFFF;
+    }
+    .two-li:hover .two-underline {
+        display: block;
+    }
+}
+@media screen and (max-width: 768px) {
+    .two-button {
+        float: right;
+        margin-top: 30px;
+    }
+    .two-ul {
+        margin: 100px 0 0 -31px;
+    }
+    .two-li {
+        height: 35px;
+    }
+}
+/* 第三块 滚动图 */
+.carousel-inner img{
+    width: 100%;
+    height: 100%;
+}
+/* 第四块  高效规范*/
+.four-img {
+    height: 264px;
+}
+.four-img1 {
+    margin: 0 auto;
+    width: 44px;
+    height: 62px;
+    background: url(../image/1/four1.png) 0 0/44px 62px;
+}
+.four-img2 {
+    margin: 13px auto 0;
+    width: 60px;
+    height: 48px;
+    background: url(../image/1/four2.png) 0 0/60px 48px;
+}
+.four-img3 {
+    margin: 6px auto 0;
+    width: 52px;
+    height: 56px;
+    background: url(../image/1/four3.png) 0 0/52px 56px;
+}
+.four-font1-3 {
+    margin: 30px auto;
+    width: 36px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@media screen and (min-width:576px) {
+.four-font2-3 {
+    font-size: 16px;
+    color: #999999;
+ }
+.four-col4 {
+    border-left: 2px dashed #DEDEDE;
+}
+.four-img4-1 {
+    margin: 64px 0 0 35px;
+    width: 144px;
+}
+.four-img4-2 {
+    margin: 20px 0 0 35px;
+}
+.four-font1 {
+    padding-left: 28px;
+    font-size: 18px;
+    line-height: 18px;
+    color: #26A26F;
+    background: url(../image/1/four4.png) 4px 2px/14px 14px no-repeat;
+}
+.four-font2 {
+    margin-top: 12px;
+    font-size: 16px;
+    color: #999999;
+}
+}
+
+@media screen and (max-width:576px) {
+    .four-font2-3 {
+        font-size: 16px;
+        text-align: center;
+        color: #999999;
+     }
+    .four-col4 {
+        border-left: 2px dashed #DEDEDE;
+    }
+    .four-img4-1 {
+        margin: 64px auto 45px;
+        width: 180px;
+    }
+    .four-img4-2 {
+        margin: 20px auto 45px;
+        width: 180px;
+        white-space: nowrap;
+    }
+    .four-font1 {
+        font-size: 18px;
+        text-align: center;
+        line-height: 18px;
+        color: #26A26F;
+        background: url(../image/1/four4.png) 47px 2px/14px 14px no-repeat;
+    }
+    .four-font2 {
+        margin-top: 12px;
+        font-size: 16px;
+        text-align: center;
+        color: #999999;
+    }
+}
+/* 第五块 如何学习*/
+.five-study {
+    margin: 100px 0 54px 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+.five-circle {
+    border: 1px solid #EAE9EA;
+    box-shadow: 0 0 2px #FFFFFF ;
+    border-radius: 25px;
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 49px;
+    color: #29B078;
+    background: #FFFFFF;
+}
+
+@media screen and (min-width: 992px) {
+.five-col{
+    margin-bottom: 122px;
+    display: flex;
+    align-items: center;   
+}
+.five-font {
+    margin-left: 12px;
+    width: 97px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #999999;
+}
+.five-triangle {
+    margin-left: 30px;
+    width: 28px;
+    height: 28px;
+    background: url(../image/1/five.png) 0 0/28px 28px;
+}
+}
+
+@media screen and (max-width: 992px) and (min-width: 768px){
+    .five-col{
+        margin-bottom: 122px;
+        display: flex;
+        align-items: center;   
+    }
+
+    .five-font {
+        margin-left: 14px;
+        width: 200px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #999999;
+    }
+    .five-triangle2 {
+        margin-left: 30px;
+        width: 28px;
+        height: 28px;
+        background: url(../image/1/five.png) 0 0/28px 28px;
+    }
+ }
+
+ @media screen and (max-width: 768px) {
+    .five-col{
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;   
+    }
+    .five-font {
+        margin-left: 14px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #999999;
+    }
+ }
+ /* 第六块  优秀学员提示*/
+ @media screen and (min-width:768px) {
+.six-student {      
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+}
+@media screen and (max-width:768px) {
+.six-student {    
+    margin-top: 50px;  
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+}
+.six-img {
+    margin-top: 72px;
+    border: 1px solid #EEEDED;
+    height: 370px;
+    background: #FFFFFF;
+}
+.six-img1 {
+    margin: 20px auto 36px;
+    width: 108px;
+    height: 108px;
+    background: url(../image/1/six1.png) 0 0/108px 108px;
+}
+.six-font1-4 {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+.six-font2-4 {
+    margin: 26px 20px 0;
+    font-size: 16px;
+    color: #999999;
+}
+.six-img2 {
+    margin: 20px auto 36px;
+    width: 108px;
+    height: 108px;
+    background: url(../image/1/six2.png) 0 0/108px 108px;
+}
+.six-img3 {
+    margin: 20px auto 36px;
+    width: 108px;
+    height: 108px;
+    background: url(../image/1/six3.png) 0 0/108px 108px;
+}
+.six-img4 {
+    margin: 20px auto 36px;
+    width: 108px;
+    height: 108px;
+    background: url(../image/1/six4.png) 0 0/108px 108px;
+}
+.six-col-bottom {
+    display: flex;
+    justify-content: center;
+}
+.six-bottom {
+    margin: 26px 2px 134px;
+    border: 1.5px solid #EEEDED;
+    border-radius: 6px;
+    width: 14px;
+    height: 14px;
+    background: #FFFFFF;
+}
+.six-bottom:hover {
+    background: #29B078;
+}
+/* 第七块 战略合作企业 */
+.seven-enterprise {   
+    margin-bottom: 68px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+.seven-col:hover {
+    box-shadow: 0 0 20px #999999;
+    z-index: 1;
+}
+@media screen and (min-width:992px) {
+.seven-img-bg1 {
+    position: absolute;
+    left: 15px;
+    top: 0;
+    border: 1px solid #EEEDED;
+    border-right: none;
+    width: calc(100% - 15px);
+    height: 176px;
+    background: #FFFFFF;
+}
+.seven-img-bg2-4 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-top: 1px solid #EEEDED;
+    border-bottom: 1px solid #EEEDED;
+    width: 100%;
+    height: 176px;
+    background: #FFFFFF;
+}
+.seven-img-bg5 {
+    position: absolute;
+    right: 15px;
+    top: 0;
+    border: 1px solid #EEEDED;
+    border-left: none;
+    width: calc(100% - 15px);
+    height: 176px;
+    background: #FFFFFF;
+}
+.seven-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.seven-img1 {
+    width: 160px;
+    height: 176px;
+    background: url(../image/1/seven1.png) 0 0/160px 176px no-repeat;
+}
+.seven-img2 {
+    width: 160px;
+    height: 136px;
+    background: url(../image/1/seven2.png) -30px 0/160px 136px no-repeat; 
+}
+.seven-img3 {
+    width: 160px;
+    height: 126px;
+    background: url(../image/1/seven3.png) 0 0/160px 120px no-repeat;
+}
+.seven-img4 {
+    width: 160px;
+    height: 66px;
+    background: url(../image/1/seven4.png) 0 0/160px 66px no-repeat;
+}
+.seven-img5 {
+    width: 160px;
+    height: 60px;
+    background: url(../image/1/seven5.png) -22px 0/230px 60px no-repeat;
+}
+}
+@media screen and (max-width:992px) {
+    .seven-col {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 176px;
+        background: #FFFFFF;
+    }
+    .seven-img1 {
+        width: 160px;
+        height: 176px;
+        background: url(../image/1/seven1.png) -10px 0/160px 176px no-repeat;
+    }
+    .seven-img2 {
+        width: 160px;
+        height: 136px;
+        background: url(../image/1/seven2.png) -20px 0/160px 136px no-repeat; 
+    }
+    .seven-img3 {
+        width: 160px;
+        height: 126px;
+        background: url(../image/1/seven3.png) 0 0/160px 120px no-repeat;
+    }
+    .seven-img4 {
+        width: 160px;
+        height: 66px;
+        background: url(../image/1/seven4.png) 0 0/160px 66px no-repeat;
+    }
+    .seven-img5 {
+        width: 160px;
+        height: 60px;
+        background: url(../image/1/seven5.png) -22px 0/230px 60px no-repeat;
+    }
+}
+/* 第八快 友情链接 */
+.eight-a2:hover{
+    text-decoration: none;
+    color: #999999;
+}
+.eight-a2:hover .eight-a2-line{
+    display: block;
+}
+
+@media screen and (min-width: 992px) {
+    .eight {
+        margin-top: 94px;
+        padding-left: 30px;
+        min-height: 136px;
+        background: #FFFFFF;
+    }
+    .eight-link {
+        margin: 20px 0 28px 15px;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+.eight-col {
+    display: flex;
+}
+.eight-a1 {
+    margin-top: 9px;
+    border-radius: 2px;
+    width: 4px;
+    height: 4px;
+    background: #999999;
+}
+.eight-a2 {
+    position: relative;
+    margin: 0 0 18px 6px;
+    font-size: 14px;
+    color:#999999;   
+}
+.eight-a2-line {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 28px;
+    width: 54px;
+    height: 1px;
+    background: #26A26F;
+}
+}
+@media screen and (max-width: 992px) and (min-width:768px) {
+    .eight {
+        padding-left: 70px;
+        min-height: 136px;
+        background: #FFFFFF;
+    }
+    .eight-link {
+        margin: 22px 0 28px -10px;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .eight-col {
+        display: flex;
+    }
+    .eight-a1 {
+        margin-top: 9px;
+        border-radius: 2px;
+        width: 4px;
+        height: 4px;
+        background: #999999;
+    }
+    .eight-a2 {
+        position: relative;
+        margin: 0 0 18px 6px;
+        width: 100px;
+        font-size: 14px;
+        /* text-align: center; */
+        color:#999999;
+    }
+    .eight-a2-line {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 28px;
+        width: 54px;
+        height: 1px;
+        background: #26A26F;
+    }
+}
+@media screen and (max-width: 768px) {
+    .eight { 
+        padding-left: 30px;
+        min-height: 136px;
+        background: #FFFFFF;
+    }
+    .eight-link {
+        margin: 22px 0 28px 0;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .eight-col {
+        display: flex;
+        justify-content: center;
+    }
+    .eight-a1 {
+        margin-top: 9px;
+        border-radius: 2px;
+        width: 4px;
+        height: 4px;
+        background: #999999;
+    }
+    .eight-a2 {
+        margin: 0 0 18px 6px;
+        width: 100px;
+        font-size: 14px;
+        color:#999999;
+    }
+}
+/* 第九块 二维码*/
+.nine {
+    border-bottom: 1px solid #32C086;
+    min-height: 170px;
+    background: #26A26F;
+}
+@media screen and (min-width:768px) {
+    .nine-col1-2 {
+        margin-top: 28px;
+    }
+    .nine-image {
+        margin: 8px 0 0 3px;
+        width: 92px;
+        height: 92px;
+        background: url(../image/1/nine.png) 0 0/92px 92px;
+    }
+}
+@media screen and (max-width:768px) {
+    .nine-col1-2-none {
+        margin-top: 28px;
+        padding-bottom: 28px;
+        border-bottom: 1px solid #32C086;
+    }
+    .nine-col3-none {
+        margin-top: 28px;
+        padding-bottom: 28px;
+    }
+    .nine-image {
+        margin: 8px 0 0 3px;
+        width: 92px;
+        height: 92px;
+        background: url(../image/1/nine.png) 0 0/92px 92px;
+    }
+}
+.nine-font1-3 {
+    font-size: 16px;
+    color: #FFFFFF;
+    white-space: nowrap;
+}
+.nine-we1-3 {
+    position: relative;
+    display: inline-block;
+    margin-top: 68px;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+.nine-underline-font4 {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 66px;
+    height: 1px;
+    background: #FFFFFF;
+}
+.nine-we-line {
+   display: inline-block;
+   margin-top: 68px;
+   color: #FFFFFF;
+}
+.nine-website-a{
+    position: relative;
+    display: inline-block;
+    margin: 21px 34px 0 0;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+.nine-underline-font6 {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 96px;
+    height: 1px;
+    background: #FFFFFF;
+}
+.nine-we1-3:hover,.nine-website-a:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.nine-we1-3:hover .nine-underline-font4,.nine-website-a:hover .nine-underline-font6,.nine-website-a:hover .nine-underline-font4{
+    display: block;
+}
+
+/* 最后 */
+.ten {
+    min-height: 10px;
+    background: #26A26F;
+}
+.ten-col {
+    font-size: 14px;
+    text-align: center;
+    line-height: 30px;
+    color: #FFFFFF;
+}

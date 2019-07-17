@@ -1,0 +1,325 @@
+/* 第一块 电话热线 */
+.one-row {
+    min-height: 40px;
+}
+.one-phone {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #29B078;
+    white-space: nowrap;
+}
+.one-col-img {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+.one-img1 {
+    border: 1px solid #29B078;
+    border-radius: 11px;
+    width: 22px;
+    height: 22px;
+    background: url(../image/1/wx.png) 3px 3px/14px 14px no-repeat;
+}
+.one-img2 {
+    margin: 0 20px;
+    border: 1px solid #29B078;
+    border-radius: 11px;
+    width: 22px;
+    height: 22px;
+    background: url(../image/1/qq.png) 3px 3px/14px 14px no-repeat;
+}
+.one-img3 {
+    border: 1px solid #29B078;
+    border-radius: 11px;
+    width: 22px;
+    height: 22px;
+    background: url(../image/1/wb.png) 3px 3px/14px 14px no-repeat;
+}
+/* 第二块 导航栏 */
+.two {
+    min-height: 100px;
+    background: #29B078;
+}
+.two-logo {
+    margin-top: 12px;
+    font-size: 36px;
+    color: #FFFFFF;
+}
+.two-website {
+    font-size: 8px;
+    letter-spacing: 3.4px;
+    color: #FFFFFF;
+}
+.two-a {
+    color: #FFFFFF;
+}
+.two-a:hover {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+@media screen and (min-width: 768px) {
+
+.two-ul-li {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.two-li1-3 {
+    position: relative;
+    width: 100px;
+    line-height: 100px;
+    text-align: center;
+}
+.two-li4 {
+    position: relative;
+    margin-right: -34px;
+    width: 100px;
+    line-height: 100px;
+    text-align: center;
+}
+.two-a-undline {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100px;
+    height: 4px;
+    background: #FFFFFF;
+}
+.two-li1-3:hover .two-a-undline,.two-li4:hover .two-a-undline {
+    display: block;
+}
+
+}
+@media screen and (max-width: 768px) {
+    .two-nav {
+        margin-top: 30px;
+        text-align: right;
+    }
+    .two-ul-li {
+        margin: 20px 0 0 -31px;
+        text-align: left;
+    }
+    .two-li1-3,.two-li4{
+        height: 50px;
+        line-height: 50px;
+    }
+
+}
+/*第三块 图片 */
+.carousel-inner img {
+    width: 100%;
+    height: 20%;
+}
+.three-font1 {
+    position: absolute;
+    left: 47%;
+    top: 28%;
+    font-size: 2.4vw;
+    color: #FFFFFF;
+}
+
+.three-font2-img {
+    position: absolute;
+    left: 48.6%;
+    top: 59%;
+    width: 8vw;
+    height: 2vw;
+    /* width: 8vw;
+    font-size: 1vw;
+    color: #FFFFFF; */
+    background: url(../image/3/3.png) 0 0/8vw 2vw no-repeat;
+}
+
+.three-font3 {
+    position: absolute;
+    left: 58%;
+    top: 45%;
+    font-size: 3vw;
+    color: #FFFFFF;
+}
+/*第四块 内容*/
+.four-homepage {
+    margin-top: 15px;
+    font-size: 14px;
+}
+.four-homepage2 {
+    font-size: 14px;
+    color: #29B078;
+}
+.four-enterprise {
+    margin-top: 15px;
+    box-shadow: 0 0 2px #E1E1E1;
+    border-radius: 1%;
+    width: 100%;
+    height: 470px;
+    background: #FFFFFF;
+}
+.four-enterprise1 {
+    border-bottom: 1px solid #E1E1E1;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+}
+.four-enterprise2 {
+    position: relative;
+    margin-top: 20px;
+    margin-left: calc(50% - 32px);
+    width: 75px;
+    font-size: 12px;
+    color: #29B078;
+}
+.four-enterprise2:hover .four-circle2  {
+    display: block;
+}
+.four-circle1 {
+    display: inline-block;
+    border: 1.5px solid #FF650E;
+    border-radius: 5.5px;
+    width: 9px;
+    height: 9px;
+}
+.four-circle2 {
+    display: none;
+    position: absolute;
+    top: 4.7px;
+    left: 0;
+    border: 1.5px solid #FF650E;
+    border-radius: 5.5px;
+    width: 9px;
+    height: 9px;
+    background: #F9A372;
+}
+.four-tudou {
+    margin: 15px 0 116px;
+    box-shadow: 0 0 2px #E1E1E1;
+    border-radius: 1%;
+    width: 100%;
+    min-height: 860px;
+    background: #FFFFFF;
+}
+.four-tudou-img {
+    float: left;
+    margin: 15px 10px 0 26px;
+    width: 100px;
+    height: 50px;
+    background: url(../image/3/2.png) 0 -20px/ 100px 110px;
+}
+.four-tudou-font1 {
+    border-bottom: 1px solid #E1E1E1;
+    width: 100%;
+    min-height: 110px;
+}
+.four-tudou-font1-1 {
+    padding: 26px 26px 20px 26px;
+    font-size: 12px;
+    text-align: justify;
+    line-height: 20px;
+    color: #999999;
+    
+}
+.four-tudou-font2 {
+    padding: 30px 26px 0;
+    width: 100%;
+    font-size: 12px;
+    text-align: justify;
+    line-height: 20px;
+    color: #999999;
+}
+/* 第五块 二维码*/
+.five {
+    margin-top: 100px;
+    border-bottom: 1px solid #32C086;
+    min-height: 170px;
+    background: #26A26F;
+}
+@media screen and (min-width:768px) {
+    .five-col1-2 {
+        margin-top: 28px;
+    }
+    .five-image {
+        margin: 8px 0 0 3px;
+        width: 92px;
+        height: 92px;
+        background: url(../image/1/nine.png) 0 0/92px 92px;
+    }
+}
+@media screen and (max-width:768px) {
+    .five-col1-2-none {
+        margin-top: 28px;
+        padding-bottom: 28px;
+        border-bottom: 1px solid #32C086;
+    }
+    .five-col3-none {
+        margin-top: 28px;
+        padding-bottom: 28px;
+    }
+    .five-image {
+        margin: 8px 0 0 3px;
+        width: 92px;
+        height: 92px;
+        background: url(../image/1/nine.png) 0 0/92px 92px;
+    }
+}
+.five-font1-3 {
+    font-size: 16px;
+    color: #FFFFFF;
+    white-space: nowrap;
+}
+.five-we1-3 {
+    position: relative;
+    display: inline-block;
+    margin-top: 68px;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+.five-underline-font4 {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 66px;
+    height: 1px;
+    background: #FFFFFF;
+}
+.five-we-line {
+   display: inline-block;
+   margin-top: 68px;
+   color: #FFFFFF;
+}
+.five-website-a{
+    position: relative;
+    display: inline-block;
+    margin: 21px 34px 0 0;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+.five-underline-font6 {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 96px;
+    height: 1px;
+    background: #FFFFFF;
+}
+.five-we1-3:hover,.five-website-a:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.five-we1-3:hover .five-underline-font4,.five-website-a:hover .five-underline-font6,.five-website-a:hover .five-underline-font4{
+    display: block;
+}
+
+/* 最后 */
+.six {
+    min-height: 10px;
+    background: #26A26F;
+}
+.six-col {
+    font-size: 14px;
+    text-align: center;
+    line-height: 30px;
+    color: #FFFFFF;
+}
