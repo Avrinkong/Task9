@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                        http://www.springframework.org/schema/tx
+                        http://www.springframework.org/schema/tx/spring-tx.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="jnshu.tiles"/>
+
+    <!-- 第一种方式：加载一个properties文件 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:redis.properties</value>
+                <value>classpath:mobile.properties</value>
+                <value>classpath:sendClound.properties</value>
+            </list>
+        </property>
+        <!--properties文件默认读取编码，不然会导致乱码-->
+        <property name="fileEncoding" value="UTF-8"/>
+    </bean>
+
+
+    <!-- 第二种方式：加载多个properties文件
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:common.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="UTF-8"/>
+    </bean>
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="properties" ref="configProperties"/>
+    </bean>
+    -->
+
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${driverClasss}"/>
+        <property name="url" value="${jdbcUrl}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${initialSize}"></property>
+        <!-- 连接池最大数量 -->
+        <property name="maxActive" value="${maxActive}"></property>
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle" value="${maxIdle}"></property>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="${minIdle}"></property>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${maxWait}"></property>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+        <property name="validationQuery" value="SELECT 'x'" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true" />
+       <!-- <property name="maxPoolPreparedStatementPerConnectionSize"
+                  value="20" />
+        &lt;!&ndash; 配置监控统计拦截的filters，去掉后监控界面sql无法统计 &ndash;&gt;
+        <property name="filters" value="stat" />-->
+    </bean>
+
+    <!-- mybatis和spring完美整合，不需要mybatis的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath:mapping/*.xml"></property>
+        <!-- 注意其他配置 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <value>
+                            helperDialect=mysql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <mybatis:scan base-package="jnshu.tiles.dao"/>
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <!--4 自动扫描对象关系映射，MapperFactoryBean可以将数据映射接口转为Spring Bean -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定会话工厂，如果当前上下文中只定义了一个则该属性可省去 -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+        <!-- 指定要自动扫描接口的基础包，实现接口 -->
+        <property name="basePackage" value="jnshu.tiles.dao"></property>
+    </bean>
+
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+<!--
+    <bean id="resource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames" ref="resourceList"/>
+        &lt;!&ndash; 刷新资源文件的周期，以秒为单位 &ndash;&gt;
+        <property name="cacheSeconds" value="5"/>
+    </bean>
+
+    <util:list id="resourceList">
+        <value>i18n/fmt_resource</value>
+    </util:list>-->
+
+
+    <!-- 国际化 -->
+   <!-- <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="i18n.messages" />
+    </bean>-->
+
+    <!--<bean id="localeResolver"
+    class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />-->
+
+   <!-- <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        &lt;!&ndash; 资源文件名 &ndash;&gt;
+        <property name="basenames">
+            <list>
+                <value>i18n/messages</value>
+            </list>
+        </property>
+        &lt;!&ndash; 资源文件编码格式 &ndash;&gt;
+        <property name="fileEncodings" value="utf-8" />
+        &lt;!&ndash; 对资源文件内容缓存时间，单位秒 &ndash;&gt;
+        <property name="cacheSeconds" value="120" />
+    </bean>
+-->
+   <!--!&#45;&#45; 配置自定义Realm &ndash;&gt;
+    <bean id="myRealm" class="shiro.controller.MyRealm"/>
+    &lt;!&ndash; 安全管理器 &ndash;&gt;
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myRealm"/>
+    </bean>
+    &lt;!&ndash; Shiro过滤器 核心&ndash;&gt;
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        &lt;!&ndash; Shiro的核心安全接口,这个属性是必须的 &ndash;&gt;
+        <property name="securityManager" ref="securityManager"/>
+        &lt;!&ndash; 身份认证失败，则跳转到登录页面的配置 &ndash;&gt;
+        <property name="loginUrl" value="/login.jsp"/>
+        &lt;!&ndash; 权限认证失败，则跳转到指定页面 &ndash;&gt;
+        <property name="unauthorizedUrl" value="/nopower.jsp"/>
+        &lt;!&ndash; Shiro连接约束配置,即过滤链的定义 &ndash;&gt;
+        <property name="filterChainDefinitions">
+            <value>
+                &lt;!&ndash;anon 表示匿名访问，不需要认证以及授权&ndash;&gt;
+                /loginAdmin=anon
+                &lt;!&ndash;authc表示需要认证 没有进行身份认证是不能进行访问的&ndash;&gt;
+                /admin*=authc
+                /student=roles[teacher]
+                /teacher=perms["user:create"]
+            </value>
+        </property>
+    </bean>
+    &lt;!&ndash; 保证实现了Shiro内部lifecycle函数的bean执行 &ndash;&gt;
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    &lt;!&ndash; 开启Shiro注解 &ndash;&gt;
+   &lt;!&ndash; <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>&ndash;&gt;-->
+
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+    </bean>
+
+
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <aop:aspectj-autoproxy proxy-target-class="true">
+    </aop:aspectj-autoproxy>
+
+   <!-- &lt;!&ndash;spring 集成缓存服务器（memcached） &ndash;&gt;
+    <bean id="memCachedPool" class="com.whalin.MemCached.SockIOPool"
+          factory-method="getInstance" init-method="initialize"
+          destroy-method="shutDown">
+
+        <constructor-arg>
+            <value>memCachedPool</value>
+        </constructor-arg>
+
+        <property name="servers">
+            <list>
+                <value>${memcached.server}</value>
+            </list>
+        </property>
+
+        <property name="initConn">
+            <value>${memcached.initConn}</value>
+        </property>
+
+        <property name="minConn">
+            <value>${memcached.minConn}</value>
+        </property>
+
+        <property name="maxConn">
+            <value>${memcached.maxConn}</value>
+        </property>
+
+        <property name="maintSleep">
+            <value>${memcached.maniSleep}</value>
+        </property>
+
+        <property name="nagle">
+            <value>${memcached.nagle}</value>
+        </property>
+
+        <property name="socketTO">
+            <value>${memcached.socketTO}</value>
+        </property>
+    </bean>
+
+    <bean id="memCachedClient" class="com.whalin.MemCached.MemCachedClient">
+        <constructor-arg>
+            <value>memCachedPool</value>
+        </constructor-arg>
+    </bean>
+-->
+
+    <!-- redis config start -->
+    <!-- 配置JedisPoolConfig实例 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxTotal" value="${redis.maxActive}" />
+        <property name="maxWaitMillis" value="${redis.maxWait}" />
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    </bean>
+
+    <!-- 配置JedisConnectionFactory -->
+    <bean id="jedisConnectionFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}" />
+        <property name="port" value="${redis.port}" />
+        <!-- <property name="password" value="${redis.pass}" /> -->
+        <property name="database" value="${redis.dbIndex}" />
+        <property name="poolConfig" ref="poolConfig" />
+    </bean>
+
+    <bean id="stringRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+
+    <!-- 配置RedisTemplate -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory" />
+        <property name="hashKeySerializer" ref="stringRedisSerializer"/>
+        <property name="keySerializer" ref="stringRedisSerializer"/>
+    </bean>
+
+    <!-- 配置RedisCacheManager -->
+    <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+        <constructor-arg name="redisOperations" ref="redisTemplate" />
+        <property name="defaultExpiration" value="${redis.expiration}" />
+        <!-- 配置缓存区间 -->
+        <property name="cacheNames">
+            <list>
+                <value>aboutCompany</value>
+                <value>aboutProfession</value>
+                <value>aboutStudent</value>
+                <value>aboutUser</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 配置RedisCacheConfig -->
+    <bean id="redisCacheConfig" class="jnshu.tiles.utils.RedisCacheConfig">
+        <constructor-arg ref="jedisConnectionFactory"/>
+        <constructor-arg ref="redisTemplate"/>
+        <constructor-arg ref="redisCacheManager"/>
+    </bean>
+
+    <!-- redis config end -->
+
+
+    <!--短信发送配置-->
+    <bean id="sendM" class="jnshu.tiles.entity.SendM" >
+        <property name="accessKeyId" value="${mobile.accessKeyId}"/>
+        <property name="singName" value="${mobile.singname}"/>
+        <property name="templateCode" value="${mobile.templatecode}"/>
+        <property name="secret" value="${mobile.secret}"/>
+        <property name="bucketName" value="${mobule.bucketName}"/>
+        <property name="endpoint" value="${mobule.endpoint}"/>
+        <!-- <constructor-arg  name="accessKeyId" value="${mobile.accessKeyId}"/>
+         <constructor-arg  name="singName" value="${mobile.singname}"/>
+         <constructor-arg  name="templateCode" value="${mobile.templatecode}"/>
+         <constructor-arg  name="secret" value="${mobile.secret}"/>-->
+    </bean>
+
+    <!--sendcloud邮件发送配置-->
+    <bean id="sendCloud" class="jnshu.tiles.entity.SendCloud">
+        <property name="apiUser" value="${apiUser}"/>
+        <property name="apiKey" value="${apiKey}"/>
+        <property name="rcpt_to" value="${rcpt_to}"/>
+        <property name="subject" value="${subject}"/>
+        <property name="html" value="${html}"/>
+    </bean>
+
+    <!--rmi服务端配置 -->
+    <bean name="rmiCompanyService" class="jnshu.tiles.service.impl.CompanyServiceImpl"/>
+    <bean name="rmiStudentService" class="jnshu.tiles.service.impl.StudentServiceImpl"/>
+    <bean name="rmiProfessionService" class="jnshu.tiles.service.impl.ProfessionServiceImpl"/>
+    <bean name="rmiUserService" class="jnshu.tiles.service.impl.UserServiceImpl"/>
+
+    <bean name="rmiCompanyServiceImpl" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!-- 对应接口实现类 -->
+        <property name="service" ref="rmiCompanyService"/>
+        <!-- 设置RMI服务名，做为RMI客户端调用接口 -->
+        <property name="serviceName" value="CompanyService"/>
+        <!-- RMI服务接口路径 -->
+        <property name="serviceInterface" value="jnshu.tiles.service.CompanyService"/>
+        <!--RMI注册端口-->
+        <property name="registryPort" value="3333"/>
+        <!-- 设置RMI服务端口 -->
+        <property name="servicePort" value="3333"/>
+    </bean>
+
+    <bean name="rmiStudentServiceImpl" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="rmiStudentService"/>
+        <property name="serviceName" value="StudentService"/>
+        <property name="serviceInterface" value="jnshu.tiles.service.StudnetService"/>
+        <property name="registryPort" value="3333"/>
+        <property name="servicePort" value="3333"/>
+    </bean>
+
+    <bean name="rmiProfessionServiceImpl" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="rmiProfessionService"/>
+        <property name="serviceName" value="ProfessionService"/>
+        <property name="serviceInterface" value="jnshu.tiles.service.ProfessionService"/>
+        <property name="registryPort" value="3333"/>
+        <property name="servicePort" value="3333"/>
+    </bean>
+
+    <bean name="rmiUserServiceImpl" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="rmiUserService"/>
+        <property name="serviceName" value="UserService"/>
+        <property name="serviceInterface" value="jnshu.tiles.service.UserService"/>
+        <property name="registryPort" value="3333"/>
+        <property name="servicePort" value="3333"/>
+    </bean>
+</beans>
