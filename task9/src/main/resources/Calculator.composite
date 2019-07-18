@@ -1,0 +1,36 @@
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           name="Calculator" targetNamespace="http://com.jnshu"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1">
+
+    <!--组合构件-->
+    <component name="CalculatorServiceComponent">
+        <!--实现-->
+       <!-- <implementation.spring location="spring.xml"/>-->
+        <implementation.java class="service.impl.Calculator"/>
+        <!--暴露服务-->
+       <!-- <service name="Calculator">
+            <interface.java interface="service.CalculatorInterface"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:8090/CalculatorRMI"/>
+        </service>-->
+
+        <!--引用-->
+        <reference name="add" target="AddComponent"/>
+        <reference name="subtract" target="SubtractComponent"/>
+        <reference name="multiply" target="MultiplyComponent"/>
+        <reference name="divide" target="DivideComponent"/>
+    </component>
+
+    <!--构件    组合构件中引用的实现-->
+    <component name="AddComponent">
+        <implementation.java class="service.impl.add"/>
+    </component>
+    <component name="SubtractComponent">
+        <implementation.java class="service.impl.subtract"/>
+    </component>
+    <component name="MultiplyComponent">
+        <implementation.java class="service.impl.multiply"/>
+    </component>
+    <component name="DivideComponent">
+        <implementation.java class="service.impl.divide"/>
+    </component>
+</composite>

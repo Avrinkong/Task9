@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sca="http://www.springframework.org/schema/sca"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/sca
+       http://www.osoa.org/xmlns/sca/1.0/spring-sca.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="service"/>
+
+    <sca:service name="Calculator" type="service.CalculatorInterface" target="calculator"/>
+
+    <sca:reference name="add" type="service.addInterface"/>
+    <sca:reference name="subtract" type="service.subtractInterface"/>
+    <sca:reference name="multiply" type="service.multiplyInterface"/>
+    <sca:reference name="divide" type="service.divideInterface"/>
+
+<!--  <sca:service name="addService" type="service.add.Add" target="addService"/>&lt;!&ndash;获取类型接口，指定实现类&ndash;&gt;
+  <sca:service name="mangService" type="service.mange.Mang" target="mangService"/>-->
+</beans>
